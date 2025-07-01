@@ -1,3 +1,175 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+:root {
+	/* Custom CSS Variables für zusätzliche Flexibilität */
+	--glow-primary: 0 0 20px rgb(139 92 246 / 0.3);
+	--glow-accent: 0 0 15px rgb(34 197 94 / 0.4);
+}
+
+@theme {
+	/* Schriftfamilien */
+	--font-sans:
+		'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+	/* Font Weights */
+	--font-weight-light: 300;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* Font Sizes für Chat-Interface */
+	--font-size-xs: 0.75rem; /* Timestamps, Meta-Info */
+	--font-size-sm: 0.875rem; /* Chat-Nachrichten */
+	--font-size-base: 1rem; /* Standard UI */
+	--font-size-lg: 1.125rem; /* Channel-Namen */
+	--font-size-xl: 1.25rem; /* Server-Namen */
+	--font-size-2xl: 1.5rem; /* Headings */
+	/* Farbpalette */
+	--color-primary-50: #ecfdfa;
+	--color-primary-100: #cffcf3;
+	--color-primary-200: #a7f3eb;
+	--color-primary-300: #6ee7d8;
+	--color-primary-400: #3ee8be; /* Haupt-Akzent für Buttons etc. */
+	--color-primary-500: #14b8a6; /* Primäre Interaktion */
+	--color-primary-600: #0d9488;
+	--color-primary-700: #0f766e;
+	--color-primary-800: #115e59;
+	--color-primary-900: #134e4a;
+	--color-primary-950: #042f2e;
+
+	/* Dunkle Basis-Farben */
+	--color-dark-50: #f8fafc;
+	--color-dark-100: #f1f5f9;
+	--color-dark-200: #e2e8f0;
+	--color-dark-300: #cbd5e1;
+	--color-dark-400: #94a3b8;
+	--color-dark-500: #64748b;
+	--color-dark-600: #475569;
+	--color-dark-700: #333841; /* etwas neutraler, weniger Blaustich */
+	--color-dark-800: #22262d; /* dunkler Anthrazit */
+	--color-dark-850: #181b20; /* fast schwarz */
+	--color-dark-900: #121417; /* tiefes Schwarzgrau */
+	--color-dark-950: #0b0c0e;
+
+	/* Akzent-Farben */
+	--color-accent-400: #4ade80;
+	--color-accent-500: #22c55e;
+	--color-accent-600: #16a34a;
+
+	--color-warning-400: #fbbf24;
+	--color-warning-500: #f59e0b;
+
+	--color-danger-400: #f87171;
+	--color-danger-500: #ef4444;
+	--color-danger-600: #dc2626;
+
+	/* Hintergrund-Farben */
+	--color-bg-primary: var(--color-dark-900);
+	--color-bg-secondary: var(--color-dark-850);
+	--color-bg-tertiary: var(--color-dark-800);
+	--color-bg-hover: var(--color-dark-700);
+	--color-bg-active: var(--color-dark-600);
+
+	/* Text-Farben */
+	--color-text-primary: #f1f5f9; /* sehr hell, gute Lesbarkeit */
+	--color-text-secondary: #cbd5e1;
+	--color-text-muted: #94a3b8;
+	--color-text-disabled: #64748b;
+
+	/* Border-Farben */
+	--color-border-primary: var(--color-dark-700);
+	--color-border-secondary: var(--color-dark-600);
+	--color-border-accent: var(--color-primary-600);
+
+	/* Spacing anpassungen für Chat-Interface */
+	--spacing-xs: 0.125rem;
+	--spacing-sm: 0.25rem;
+	--spacing-md: 0.5rem;
+	--spacing-lg: 0.75rem;
+	--spacing-xl: 1rem;
+	--spacing-2xl: 1.5rem;
+	--spacing-3xl: 2rem;
+
+	/* Border Radius für moderne UI */
+	--radius-sm: 0.25rem;
+	--radius-md: 0.375rem;
+	--radius-lg: 0.5rem;
+	--radius-xl: 0.75rem;
+	--radius-2xl: 1rem;
+
+	/* Shadows für Tiefe */
+	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+	--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+	--shadow-glow: 0 0 0 1px rgb(139 92 246 / 0.2), 0 0 20px rgb(139 92 246 / 0.1);
+
+	--glow-primary: 0 0 20px rgb(20 184 166 / 0.3);
+	--glow-accent: 0 0 15px rgb(245 158 11 / 0.4);
+}
+
+@layer utilities {
+	/* Chat-spezifische Utilities */
+	.chat-bubble {
+		@apply bg-dark-800 border-dark-700 rounded-xl border p-3 shadow-md;
+	}
+
+	.chat-bubble-own {
+		@apply bg-primary-600 rounded-xl p-3 text-white shadow-md;
+	}
+
+	.server-sidebar {
+		@apply bg-dark-900 border-dark-700 border-r;
+	}
+
+	.channel-sidebar {
+		@apply bg-dark-850 border-dark-700 border-r;
+	}
+
+	.main-chat {
+		@apply bg-dark-900;
+	}
+
+	.message-input {
+		@apply bg-dark-800 border-dark-700 text-text-primary placeholder-text-muted focus:border-primary-500 focus:ring-primary-500 rounded-lg border px-4 py-2 transition-colors focus:ring-1 focus:outline-none;
+	}
+
+	.btn-primary {
+		@apply bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-lg px-4 py-2 font-medium text-white transition-colors focus:ring-2 focus:outline-none;
+	}
+
+	.btn-secondary {
+		@apply bg-dark-700 hover:bg-dark-600 text-text-primary focus:ring-dark-500 rounded-lg px-4 py-2 font-medium transition-colors focus:ring-2 focus:outline-none;
+	}
+
+	.voice-active {
+		@apply ring-accent-500 shadow-[0_0_15px_rgb(34_197_94_/_0.4)] ring-2;
+	}
+
+	.online-indicator {
+		@apply bg-accent-500 border-dark-900 h-3 w-3 rounded-full border-2;
+	}
+
+	.offline-indicator {
+		@apply bg-dark-500 border-dark-900 h-3 w-3 rounded-full border-2;
+	}
+
+	.glow-primary {
+		box-shadow: var(--glow-primary);
+	}
+
+	.glow-accent {
+		box-shadow: var(--glow-accent);
+	}
+
+	.gradient-primary {
+		@apply from-primary-600 to-primary-500 bg-gradient-to-r;
+	}
+
+	.gradient-accent {
+		@apply from-accent-600 to-accent-500 bg-gradient-to-r;
+	}
+}
