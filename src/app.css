@@ -2,6 +2,10 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
+body {
+	background-color: var(--color-bg-primary);
+}
+
 :root {
 	/* Custom CSS Variables für zusätzliche Flexibilität */
 	--glow-primary: 0 0 20px rgb(139 92 246 / 0.3);
